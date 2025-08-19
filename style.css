@@ -562,3 +562,21 @@ html, body {
   .switch, .colorful-button { padding: 8px 14px; font-size: 14px; }
   #menu-icon { font-size: 26px; top: 12px; left: 12px; }
 }
+
+#song-notice {
+  background: rgba(0, 180, 255, 0.2);
+  color: #00b4ff;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  font-family: monospace;
+  box-shadow: 0 0 8px rgba(0, 180, 255, 0.5);
+  animation: pulseNotice 2s infinite alternate;
+}
+
+@keyframes pulseNotice {
+  0% { box-shadow: 0 0 5px rgba(0,180,255,0.3); }
+  100% { box-shadow: 0 0 15px rgba(0,180,255,0.7); }
+}
