@@ -32,6 +32,6 @@ A relaxing web experience with interactive clouds, rain, stars, wind, light trai
 ## 📬 Contact
 Want your favorite song added? DM me and it might appear in the music menu! 💌
 
-## Readme.md by Anvi.T
-
 Made with 💖 by Arpan Murmu
+
+## Read me by Anvi.T 
