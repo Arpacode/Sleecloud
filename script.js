@@ -10,7 +10,8 @@ for (let i = 0; i < starCount; i++) {
   document.body.appendChild(star);
 }
 
-// ---------- RAIN (your original div raindrops) ----------
+//Rain logic
+
 let isRaining = false;
 let isColorful = false;
 let rainInterval;
@@ -59,7 +60,7 @@ function toggleColorfulRain() {
 document.getElementById('switch').addEventListener('click', toggleRain);
 document.getElementById('colorful-button').addEventListener('click', toggleColorfulRain);
 
-// ---------- LOADING (ASCII bar) ----------
+//LOADING 
 let progress = 0;
 const loadingBarElement = document.getElementById('loading-bar');
 
@@ -84,7 +85,7 @@ function updateLoadingBar() {
 }
 updateLoadingBar();
 
-// ---------- MUSIC MENU (Arch-like open/close + blur) ----------
+//MUSIC MENU
 const menuIcon = document.getElementById("menu-icon");
 const overlay  = document.getElementById("overlay");
 const musicBox = document.getElementById("music-box");
@@ -117,7 +118,7 @@ closeBtn.addEventListener("click", closeMenu);
 musicBox.addEventListener("mousemove", resetAutoClose);
 musicBox.addEventListener("touchstart", resetAutoClose);
 
-// choose & play
+// choose & play fuck your wish :) 
 options.forEach(btn => {
   btn.addEventListener("click", () => {
     const src = btn.dataset.src;
