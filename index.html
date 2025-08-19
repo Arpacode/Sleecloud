@@ -44,4 +44,108 @@
 
   <script src="script.js" defer></script>
 </body>
+<script>
+// ===== Wind Effect =====
+const windCanvas = document.createElement("canvas");
+windCanvas.id = "windCanvas";
+document.body.appendChild(windCanvas);
+
+const wctx = windCanvas.getContext("2d");
+windCanvas.style.position = "fixed";
+windCanvas.style.top = "0";
+windCanvas.style.left = "0";
+windCanvas.style.pointerEvents = "none";
+windCanvas.style.zIndex = "5"; 
+resizeWind();
+
+window.addEventListener("resize", resizeWind);
+function resizeWind() {
+  windCanvas.width = window.innerWidth;
+  windCanvas.height = window.innerHeight;
+}
+
+class WindArrow {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * windCanvas.width;
+    this.y = Math.random() * windCanvas.height;
+    this.speed = 0.5 + Math.random() * 1.5; // wind speed
+    this.dir = Math.random() > 0.5 ? 1 : -1; // > or <
+    this.size = 14;
+  }
+  update() {
+    this.x += this.speed * this.dir;
+    if (this.x > windCanvas.width + 20 || this.x < -20) {
+      this.reset();
+      this.y = Math.random() * windCanvas.height;
+      this.dir = Math.random() > 0.5 ? 1 : -1;
+    }
+  }
+  draw() {
+    wctx.fillStyle = "rgba(255,255,255,0.4)";
+    wctx.font = `${this.size}px monospace`;
+    wctx.fillText(this.dir === 1 ? ">" : "<", this.x, this.y);
+  }
+}
+
+let arrows = Array.from({ length: 40 }, () => new WindArrow());
+
+function animateWind() {
+  wctx.clearRect(0, 0, windCanvas.width, windCanvas.height);
+  arrows.forEach(a => {
+    a.update();
+    a.draw();
+  });
+  requestAnimationFrame(animateWind);
+}
+animateWind();
+
+// ===== Light Trail Effect =====
+const trailCanvas = document.createElement("canvas");
+trailCanvas.id = "trailCanvas";
+document.body.appendChild(trailCanvas);
+
+const tctx = trailCanvas.getContext("2d");
+trailCanvas.style.position = "fixed";
+trailCanvas.style.top = "0";
+trailCanvas.style.left = "0";
+trailCanvas.style.pointerEvents = "none";
+trailCanvas.style.zIndex = "10";
+resizeTrail();
+
+window.addEventListener("resize", resizeTrail);
+function resizeTrail() {
+  trailCanvas.width = window.innerWidth;
+  trailCanvas.height = window.innerHeight;
+}
+
+let trails = [];
+
+document.addEventListener("mousemove", e => createTrail(e.x, e.y));
+document.addEventListener("touchmove", e => {
+  let touch = e.touches[0];
+  createTrail(touch.clientX, touch.clientY);
+});
+
+function createTrail(x, y) {
+  trails.push({ x, y, alpha: 1, radius: 6 });
+}
+
+function animateTrails() {
+  tctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+  trails.forEach((p, i) => {
+    tctx.beginPath();
+    tctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    tctx.fillStyle = `rgba(0, 200, 255, ${p.alpha})`;
+    tctx.fill();
+    p.alpha -= 0.02;
+    p.radius += 0.5;
+    if (p.alpha <= 0) trails.splice(i, 1);
+  });
+  requestAnimationFrame(animateTrails);
+}
+animateTrails();
+</script>
 </html>
