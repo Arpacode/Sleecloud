@@ -82,7 +82,7 @@ html, body {
   100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* Controls */
+/* Controls ;) */
 .controls {
   position: fixed;
   bottom: 20px;
@@ -109,7 +109,7 @@ html, body {
 .colorful-button { opacity: 0; transition: opacity 0.5s ease; }
 .colorful-button.visible { opacity: 1; }
 
-/* Watermark */
+/* Watermark arpan */
 .watermark {
   position: fixed;
   bottom: 20px;
@@ -170,7 +170,7 @@ html, body {
   50%     { transform: scale(1.15) rotate(5deg); }
 }
 
-/* Overlay + Arch-like transition + blur */
+/* Overlay ahh transition*/
 #overlay {
   position: fixed;
   inset: 0;
@@ -195,7 +195,7 @@ html, body {
   pointer-events: auto;
 }
 
-//* Neon Music Player Style */
+//* Neon Music Player Style :) */
 .music-player {
     width: 300px;
     margin: 50px auto;
@@ -281,7 +281,7 @@ html, body {
     0 0 30px rgba(255,255,0,0.5);
 }
 
-/* Responsive tweaks */
+/* Responsive tweaks , twerk */
 @media (max-width: 480px) {
   .cloud { top: 120px; transform: translateX(-50%) scale(0.9); }
   .switch, .colorful-button { padding: 8px 14px; font-size: 14px; }
@@ -310,7 +310,7 @@ html, body {
   to   { opacity: 1; }
 }
 
-/* Your original glowing cloud */
+/* glowing cloud */
 .cloud {
   width: 200px;
   height: 60px;
@@ -408,7 +408,7 @@ html, body {
   user-select: none;
 }
 
-/* Loading screen (ASCII bar) */
+/* Loading screen (ASCII bar) idea ;)*/
 #loading-screen {
   position: fixed;
   inset: 0;
@@ -452,7 +452,7 @@ html, body {
   50%     { transform: scale(1.15) rotate(5deg); }
 }
 
-/* Overlay + Arch-like transition + blur */
+
 #overlay {
   position: fixed;
   inset: 0;
@@ -562,7 +562,7 @@ html, body {
   .switch, .colorful-button { padding: 8px 14px; font-size: 14px; }
   #menu-icon { font-size: 26px; top: 12px; left: 12px; }
 }
-
+/* Notice for my dms */
 #song-notice {
   background: rgba(0, 180, 255, 0.2);
   color: #00b4ff;
