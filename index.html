@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sleecloud</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-bar-container">
+      <div class="loading-bar" id="loading-bar"></div>
+      <div class="loading-message">Sit back and relax</div>
+    </div>
+  </div>
+
+  <!-- Star icon to open music menu -->
+  <button id="menu-icon" aria-label="Open music menu">⭐</button>
+
+  <!-- Cloud + Watermark + Controls -->
+  <div class="cloud" id="cloud"></div>
+  <div class="watermark">Arpan Murmu</div>
+
+  <div class="controls">
+    <button class="switch" id="switch">Start Rain</button>
+    <button class="colorful-button" id="colorful-button">Colorful Rain</button>
+  </div>
+
+  <!-- Music Menu Overlay -->
+  <div id="overlay" aria-hidden="true">
+    <div id="music-box" role="dialog" aria-modal="true" aria-labelledby="music-title">
+      <button id="close-btn" aria-label="Close">✖</button>
+      <h3 id="music-title">Choose a Song</h3>
+
+      <button class="song-option" data-src="mrs-magic.mp3">Mrs Magic — Strawberry Guy</button>
+      <button class="song-option" data-src="subwoofer-lullaby.mp3">Subwoofer Lullaby — C418</button>
+      <button class="song-option" data-src="sweden.mp3">Sweden — Minecraft</button>
+
+      <audio id="player" controls></audio>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
