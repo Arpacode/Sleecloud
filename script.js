@@ -1,4 +1,4 @@
-// ---------- STARS ----------
+// star
 const starCount = 100;
 for (let i = 0; i < starCount; i++) {
   const star = document.createElement('div');
@@ -69,10 +69,10 @@ const loadingMessage = document.querySelector('.loading-message');
 //loading msgs
 const messages = [
   "Warming up...",
-  "Loading clouds...",
+  "Loading cloud...",
   "Almost ready...",
   "Sit back and relax",
-  "Made by Arpan"
+  "Made by @Arpan"
 
 ];
 
