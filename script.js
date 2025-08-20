@@ -63,20 +63,39 @@ document.getElementById('colorful-button').addEventListener('click', toggleColor
 //LOADING 
 let progress = 0;
 const loadingBarElement = document.getElementById('loading-bar');
+//loading msg updater
+const loadingMessage = document.querySelector('.loading-message');
+
+//loading msgs
+const messages = [
+  "Warming up...",
+  "Loading clouds...",
+  "Almost ready...",
+  "Sit back and relax",
+  "Made by Arpan"
+
+];
 
 function updateLoadingBar() {
-  const totalBlocks = 30; // change to resize bar
+  const totalBlocks = 30; // bar size
   const filledBlocks = Math.floor((progress / 100) * totalBlocks);
   const emptyBlocks  = totalBlocks - filledBlocks;
 
+
   const bar = "█".repeat(filledBlocks) + "░".repeat(emptyBlocks);
   loadingBarElement.textContent = `[${bar}] ${progress}%`;
+
+//update loading msgs 
+
+loadingMessage.textContent = messages[Math.floor(progress / 19.9)];
 
   if (progress < 100) {
     progress++;
     setTimeout(updateLoadingBar, 35);
   } else {
+
     // Fade out loading screen
+
     const ls = document.getElementById('loading-screen');
     ls.style.transition = 'opacity 0.5s ease';
     ls.style.opacity = '0';
