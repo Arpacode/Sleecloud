@@ -32,7 +32,7 @@ A relaxing web experience with interactive clouds, rain, stars, wind, light trai
 ## 📬 Contact
 Want your favorite song added? DM me and it might appear in the music menu! 💌
 
-Made with 💖 by Arpan Murmu
+Made with 💖 by Arpan Murmu, 
 Some credit goes to my Discord friends 🍫👍
 
 ## Readme.md by Anvi.T 
