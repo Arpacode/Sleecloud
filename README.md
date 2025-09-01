@@ -34,4 +34,4 @@ Want your favorite song added? DM me and it might appear in the music menu! 💌
 
 Made with 💖 by Arpan Murmu
 
-## Read me by Anvi.T 
+## Readme.md by Anvi.T 
