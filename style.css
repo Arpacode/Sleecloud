@@ -22,7 +22,7 @@ html, body {
   to   { opacity: 1; }
 }
 
-/* Your original glowing cloud */
+
 .cloud {
   width: 200px;
   height: 60px;
@@ -142,7 +142,7 @@ html, body {
 
 .loading-bar {
     font-size: 10px;
-    margin-bottom: 10px; /* Small gap before message */
+    margin-bottom: 10px;
 }
 
 .loading-message {
@@ -150,7 +150,6 @@ html, body {
     color: white;
 }
 
-/* Music menu trigger (star) */
 #menu-icon {
   position: fixed;
   top: 16px;
