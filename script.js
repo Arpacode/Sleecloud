@@ -1,116 +1,140 @@
-// star
-const starCount = 100;
-for (let i = 0; i < starCount; i++) {
-  const star = document.createElement('div');
-  star.className = 'star';
-  star.style.top = Math.random() * 100 + 'vh';
-  star.style.left = Math.random() * 100 + 'vw';
-  const size = Math.random() * 2 + 1;
-  star.style.width = star.style.height = size + 'px';
-  document.body.appendChild(star);
-}
-
-//Rain logic
-
-let isRaining = false;
+// ==========================
+// 🌟 GLOBAL STATE
+// ==========================
 let isColorful = false;
-let rainInterval;
-const colors = ["#00B4FF", "#FF4500", "#00FF00", "#FF0000"];
-
-function createRaindrop() {
-  const raindrop = document.createElement('div');
-  raindrop.className = 'raindrop';
-
-  const cloud = document.getElementById('cloud');
-  const cloudRect = cloud.getBoundingClientRect();
-  const leftPosition = cloudRect.left + Math.random() * cloudRect.width;
-
-  raindrop.style.left = leftPosition + 'px';
-  raindrop.style.top = cloudRect.bottom + 'px';
-
-  if (isColorful) {
-    const c = colors[Math.floor(Math.random() * colors.length)];
-    raindrop.style.background = `linear-gradient(to bottom, ${c}, ${c})`;
-    raindrop.style.boxShadow = `0 0 5px ${c}, 0 0 10px ${c}, 0 0 15px ${c}`;
-  }
-
-  document.body.appendChild(raindrop);
-  raindrop.addEventListener('animationend', () => raindrop.remove());
-}
-
-function toggleRain() {
-  if (isRaining) {
-    clearInterval(rainInterval);
-    isRaining = false;
-    document.getElementById('switch').textContent = "Start Rain";
-    document.getElementById('colorful-button').classList.remove('visible');
-    document.querySelectorAll('.raindrop').forEach(r => r.remove());
-  } else {
-    rainInterval = setInterval(createRaindrop, 50);
-    isRaining = true;
-    document.getElementById('switch').textContent = "Stop Rain";
-    document.getElementById('colorful-button').classList.add('visible');
-  }
-}
-function toggleColorfulRain() {
-  isColorful = !isColorful;
-  document.getElementById('colorful-button').textContent = isColorful ? "Normal Rain" : "Colorful Rain";
-  document.querySelectorAll('.raindrop').forEach(r => r.remove());
-}
-document.getElementById('switch').addEventListener('click', toggleRain);
-document.getElementById('colorful-button').addEventListener('click', toggleColorfulRain);
-
-//LOADING 
+let isRaining = false;
+let rainTimer;
 let progress = 0;
-const loadingBarElement = document.getElementById('loading-bar');
-//loading msg updater
-const loadingMessage = document.querySelector('.loading-message');
 
-//loading msgs
+const colors = ["#00B4FF", "#FF4500", "#00FF00", "#FF0000"];
 const messages = [
   "Warming up...",
   "Loading cloud...",
   "Almost ready...",
   "Sit back and relax",
   "Made by @Arpan"
-
 ];
 
-function updateLoadingBar() {
-  const totalBlocks = 30; // bar size
-  const filledBlocks = Math.floor((progress / 100) * totalBlocks);
-  const emptyBlocks  = totalBlocks - filledBlocks;
+// ==========================
+// 📌 DOM CACHE (important)
+// ==========================
+const cloud = document.getElementById('cloud');
+const switchBtn = document.getElementById('switch');
+const colorBtn = document.getElementById('colorful-button');
 
+const loadingBar = document.getElementById('loading-bar');
+const loadingMsg = document.querySelector('.loading-message');
+const loadingScreen = document.getElementById('loading-screen');
 
-  const bar = "█".repeat(filledBlocks) + "░".repeat(emptyBlocks);
-  loadingBarElement.textContent = `[${bar}] ${progress}%`;
+// ==========================
+// ⭐ STARS
+// ==========================
+(function createStars() {
+  const fragment = document.createDocumentFragment();
 
-//update loading msgs 
+  for (let i = 0; i < 100; i++) {
+    let star = document.createElement('div');
+    star.className = 'star';
 
-loadingMessage.textContent = messages[Math.floor(progress / 19.9)];
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.left = Math.random() * 100 + 'vw';
+
+    let size = Math.random() * 2 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+
+    fragment.appendChild(star);
+  }
+
+  document.body.appendChild(fragment);
+})();
+
+// ==========================
+// 🌧️ RAIN
+// ==========================
+function createRaindrop() {
+  const drop = document.createElement('div');
+  drop.className = 'raindrop';
+
+  const rect = cloud.getBoundingClientRect();
+
+  drop.style.left = rect.left + Math.random() * rect.width + 'px';
+  drop.style.top = rect.bottom + 'px';
+
+  if (isColorful) {
+    const c = colors[Math.floor(Math.random() * colors.length)];
+    drop.style.background = c;
+    drop.style.boxShadow = `0 0 8px ${c}`;
+  }
+
+  document.body.appendChild(drop);
+
+  drop.addEventListener('animationend', () => drop.remove());
+}
+
+function toggleRain() {
+  if (isRaining) {
+    clearInterval(rainTimer);
+    isRaining = false;
+    switchBtn.textContent = "Start Rain";
+    colorBtn.classList.remove('visible');
+
+    document.querySelectorAll('.raindrop').forEach(d => d.remove());
+  } else {
+    rainTimer = setInterval(createRaindrop, 60);
+    isRaining = true;
+    switchBtn.textContent = "Stop Rain";
+    colorBtn.classList.add('visible');
+  }
+}
+
+function toggleColorfulRain() {
+  isColorful = !isColorful;
+
+  colorBtn.textContent = isColorful ? "Normal Rain" : "Colorful Rain";
+
+  document.querySelectorAll('.raindrop').forEach(d => d.remove());
+}
+
+// ==========================
+// ⏳ LOADING SCREEN
+// ==========================
+function updateBar() {
+  const total = 30;
+  const filled = Math.floor(progress / 100 * total);
+  const empty = total - filled;
+
+  loadingBar.textContent =
+    `[${'█'.repeat(filled)}${'░'.repeat(empty)}] ${progress}%`;
+
+  const msgIndex = Math.min(
+    Math.floor(progress / 20),
+    messages.length - 1
+  );
+  loadingMsg.textContent = messages[msgIndex];
 
   if (progress < 100) {
     progress++;
-    setTimeout(updateLoadingBar, 35);
+    setTimeout(updateBar, 35);
   } else {
+    loadingScreen.style.transition = 'opacity .5s';
+    loadingScreen.style.opacity = 0;
 
-    // Fade out loading screen
-
-    const ls = document.getElementById('loading-screen');
-    ls.style.transition = 'opacity 0.5s ease';
-    ls.style.opacity = '0';
-    setTimeout(() => { ls.style.display = 'none'; }, 500);
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
   }
 }
-updateLoadingBar();
 
-//MUSIC MENU
+// ==========================
+// 🎵 MUSIC MENU
+// ==========================
 const menuIcon = document.getElementById("menu-icon");
-const overlay  = document.getElementById("overlay");
+const overlay = document.getElementById("overlay");
 const musicBox = document.getElementById("music-box");
 const closeBtn = document.getElementById("close-btn");
-const player   = document.getElementById("player");
-const options  = document.querySelectorAll(".song-option");
+const player = document.getElementById("player");
+const options = document.querySelectorAll(".song-option");
 
 let autoCloseTimer;
 
@@ -119,32 +143,50 @@ function openMenu() {
   musicBox.classList.add("active");
   resetAutoClose();
 }
+
 function closeMenu() {
   musicBox.classList.add("closing");
+
   setTimeout(() => {
     overlay.classList.remove("active");
     musicBox.classList.remove("active", "closing");
-  }, 400); // match CSS
+  }, 400);
+
   clearTimeout(autoCloseTimer);
 }
+
 function resetAutoClose() {
   clearTimeout(autoCloseTimer);
   autoCloseTimer = setTimeout(closeMenu, 15000);
 }
 
-menuIcon.addEventListener("click", openMenu);
-closeBtn.addEventListener("click", closeMenu);
+// ==========================
+// 🎧 EVENTS
+// ==========================
+switchBtn.onclick = toggleRain;
+colorBtn.onclick = toggleColorfulRain;
+
+menuIcon.onclick = openMenu;
+closeBtn.onclick = closeMenu;
+
 musicBox.addEventListener("mousemove", resetAutoClose);
 musicBox.addEventListener("touchstart", resetAutoClose);
 
-// choose & play fuck your wish :) 
 options.forEach(btn => {
-  btn.addEventListener("click", () => {
+  btn.onclick = () => {
     const src = btn.dataset.src;
     if (src) {
       player.src = src;
-      player.play().catch(()=>{}); // mobile may require user gesture; this is already a click
+      player.play().catch(() => {});
       resetAutoClose();
     }
-  });
+  };
 });
+
+// ==========================
+// 🚀 INIT
+// ==========================
+updateBar();
+
+//fuck i spent a week to create this shit 😭🔥
+//hope you like it 🌷
