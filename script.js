@@ -22,26 +22,33 @@ const loadingBar = document.getElementById('loading-bar');
 const loadingMsg = document.querySelector('.loading-message');
 const loadingScreen = document.getElementById('loading-screen');
 
-//STARS
-(function createStars() {
-  const fragment = document.createDocumentFragment();
+//STARs
+function makeStars() {
+    var stars = document.createDocumentFragment(); // idk why this is faster but yt said so
+    
+    for(var i = 0; i < 100; i++) { 
+        var s = document.createElement('div');
+        s.className = 'star';
+        
+        // random position everywhere
+        s.style.top = Math.random() * 100 + 'vh';
+        s.style.left = Math.random() * 100 + 'vw';
+        
+        // size between 1px and 3px looks good
+        var sz = Math.random() * 2 + 1;
+        s.style.width = sz + 'px';
+        s.style.height = sz + 'px';
+        
+        // add twinkle later
+        // s.style.animation = 'twinkle 2s infinite';
+        
+        stars.appendChild(s);
+    }
+    
+    document.body.appendChild(stars); 
+}
 
-  for (let i = 0; i < 100; i++) {
-    let star = document.createElement('div');
-    star.className = 'star';
-
-    star.style.top = Math.random() * 100 + 'vh';
-    star.style.left = Math.random() * 100 + 'vw';
-
-    let size = Math.random() * 2 + 1;
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-
-    fragment.appendChild(star);
-  }
-
-  document.body.appendChild(fragment);
-})();
+makeStars(); 
 
 //RAIN
 function createRaindrop() {
