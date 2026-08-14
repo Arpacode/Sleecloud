@@ -1,6 +1,4 @@
-// ==========================
-// 🌟 GLOBAL STATE
-// ==========================
+//GLOBAL STATE
 let isColorful = false;
 let isRaining = false;
 let rainTimer;
@@ -15,9 +13,7 @@ const messages = [
   "Made by @Arpan"
 ];
 
-// ==========================
-// 📌 DOM CACHE (important)
-// ==========================
+//DOM CACHE 
 const cloud = document.getElementById('cloud');
 const switchBtn = document.getElementById('switch');
 const colorBtn = document.getElementById('colorful-button');
@@ -26,9 +22,7 @@ const loadingBar = document.getElementById('loading-bar');
 const loadingMsg = document.querySelector('.loading-message');
 const loadingScreen = document.getElementById('loading-screen');
 
-// ==========================
-// ⭐ STARS
-// ==========================
+//STARS
 (function createStars() {
   const fragment = document.createDocumentFragment();
 
@@ -49,9 +43,7 @@ const loadingScreen = document.getElementById('loading-screen');
   document.body.appendChild(fragment);
 })();
 
-// ==========================
-// 🌧️ RAIN
-// ==========================
+//RAIN
 function createRaindrop() {
   const drop = document.createElement('div');
   drop.className = 'raindrop';
@@ -96,9 +88,7 @@ function toggleColorfulRain() {
   document.querySelectorAll('.raindrop').forEach(d => d.remove());
 }
 
-// ==========================
-// ⏳ LOADING SCREEN
-// ==========================
+//Loading screen
 function updateBar() {
   const total = 30;
   const filled = Math.floor(progress / 100 * total);
@@ -126,9 +116,7 @@ function updateBar() {
   }
 }
 
-// ==========================
-// 🎵 MUSIC MENU
-// ==========================
+//MUSIC menu
 const menuIcon = document.getElementById("menu-icon");
 const overlay = document.getElementById("overlay");
 const musicBox = document.getElementById("music-box");
@@ -159,10 +147,7 @@ function resetAutoClose() {
   clearTimeout(autoCloseTimer);
   autoCloseTimer = setTimeout(closeMenu, 15000);
 }
-
-// ==========================
-// 🎧 EVENTS
-// ==========================
+//Events
 switchBtn.onclick = toggleRain;
 colorBtn.onclick = toggleColorfulRain;
 
@@ -183,9 +168,8 @@ options.forEach(btn => {
   };
 });
 
-// ==========================
-// 🚀 INIT
-// ==========================
+
+//INIT
 updateBar();
 
 //fuck i spent a week to create this shit 😭🔥
